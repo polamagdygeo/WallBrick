@@ -8,15 +8,18 @@
 #include "Ball.h"
 #include "GameConfig.h"
 
+#define BALL_RADIUS					15u
+#define BALL_DEFAULT_THROW_ANGLE	250u
+
 
 Ball::Ball(View* v){
 	int x,y;
-	this->angle = 250;
-	this->radius = 15;
+	this->angle = BALL_DEFAULT_THROW_ANGLE;
+	this->radius = BALL_RADIUS;
 	this->isThrown = false;
 	pParentView = v;
 	pParentView->getGameAreaDim(x,y);
-	this->setPos(x/2,y - 15 - 10 - this->radius);
+	this->setPos(x / 2 , y - BAR_WIDTH - FRAME_THICKNESS - FRAME_BAR_SPACE_Y - this->radius);
 }
 
 
@@ -45,42 +48,42 @@ void Ball::updatePos(){
 		/*Down right*/
 		if(curr_angle == 0)
 		{
-			x+=1;
+			x += 1;
 		}
 		else if(curr_angle < 90)
 		{
-			x+=1;
-			y+=1;
+			x += 1;
+			y += 1;
 		}
 		else if(curr_angle == 90)
 		{
-			y+=1;
+			y += 1;
 		}
 		/*Down left*/
 		else if(curr_angle < 180)
 		{
-			x-=1;
-			y+=1;
+			x -= 1;
+			y += 1;
 		}
 		else if(curr_angle == 180)
 		{
-			x-=1;
+			x -= 1;
 		}
 		/*Up left*/
 		else if(curr_angle < 270)
 		{
-			x-=1;
-			y-=1;
+			x -= 1;
+			y -= 1;
 		}
 		else if(curr_angle == 270)
 		{
-			y-=1;
+			y -= 1;
 		}
 		/*Up right*/
 		else if(curr_angle < 360)
 		{
-			x+=1;
-			y-=1;
+			x += 1;
+			y -= 1;
 		}
 
 		this->setPos(x,y);
@@ -89,7 +92,7 @@ void Ball::updatePos(){
 
 
 void Ball::setAngle(int angle){
-	this->angle = angle%360;
+	this->angle = angle % 360;
 }
 
 int Ball::getAngle(){
@@ -129,7 +132,7 @@ void Ball::_throw(void)
 	this->isThrown = true;
 }
 
-bool Ball::is_Thrown()
+bool Ball::isThrown()
 {
 	return this->isThrown;
 }

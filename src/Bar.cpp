@@ -7,16 +7,16 @@
 
 #include "Bar.h"
 #include "tBarrier.h"
+#include "Frame.h"
 
 
 Bar::Bar(View* v){
 	int x,y;
+	pParentView->getGameAreaDim(x,y);
 	this->setBarrierType(BAR);
-	this->setPos(640/2 - 75,480 - 15 - 10);
+	this->setPos((x / 2), y - BAR_WIDTH - FRAME_THICKNESS - FRAME_BAR_SPACE_Y);
 	pParentView = v;
-	pParentView->get
-
-	this->setDim(150,15);
+	this->setDim(BAR_LENGTH,BAR_WIDTH);
 }
 
 
@@ -34,16 +34,16 @@ void Bar::move(tDirection dir){
 
 	if(dir == DIR_RIGHT)
 	{
-		if(prev_x+this->dim_x < 640-5-10)
+		if((prev_x + this->dim_x) < (FRAME_LENGTH - FRAME_THICKNESS - FRAME_BAR_SPACE_X))
 		{
-			this->setPos(prev_x+bar_step,prev_y);
+			this->setPos(prev_x + bar_step,prev_y);
 		}
 	}
 	else if(dir == DIR_LEFT)
 	{
-		if(prev_x > 5+10)
+		if(prev_x > (FRAME_THICKNESS + FRAME_BAR_SPACE_X))
 		{
-			this->setPos(prev_x-bar_step,prev_y);
+			this->setPos(prev_x - bar_step,prev_y);
 		}
 	}
 }

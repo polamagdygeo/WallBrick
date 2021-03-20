@@ -9,15 +9,8 @@
 #include "tBarrier.h"
 #include "tColor.h"
 
-map<int,int> Brick::ColorScoring;
-
 Brick::Brick(){
 	this->setBarrierType(BRICK);
-
-	Brick::ColorScoring[COLOR_RED] = 10;
-	Brick::ColorScoring[COLOR_GREED] = 20;
-	Brick::ColorScoring[COLOR_BLUE] = 30;
-
 }
 
 

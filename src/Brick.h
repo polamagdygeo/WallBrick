@@ -13,6 +13,8 @@
 #include <map>
 using namespace std;
 
+#define BRICK_WIDTH				15u
+
 class Brick : public Barrier
 {
 

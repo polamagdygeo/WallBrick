@@ -12,7 +12,7 @@ Session::Session(SDL_Renderer* r,int x,int y){
 	this->score = 0;
 	this->m_View = new View(r,x,y);
 	this->m_View->generateBricks();
-	this->m_View->updateObjVector();
+	this->m_View->updateObjList();
 }
 
 

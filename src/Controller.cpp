@@ -9,8 +9,10 @@
 #include "tBarrier.h"
 #include "GameConfig.h"
 
+#define VIEW_UPDATE_RATE
 
-Controller::Controller():update_tick(40){
+
+Controller::Controller():update_tick(VIEW_UPDATE_RATE){
 	this->tick = 0;
 
     //Create window
@@ -51,13 +53,13 @@ void Controller::update(){
 
 	this->tick = SDL_GetTicks();
 
-    while( SDL_PollEvent( &event ) != 0 )
+    while(SDL_PollEvent(&event) != 0 )
     {
         //User presses a key
-        if( event.type == SDL_KEYDOWN )
+        if(event.type == SDL_KEYDOWN)
         {
             //Select surfaces based on key press
-            switch( event.key.keysym.sym )
+            switch(event.key.keysym.sym)
             {
                 case SDLK_LEFT:
                 	this->m_ptr_Session->m_View->m_Bar.move(DIR_LEFT);
@@ -86,7 +88,7 @@ void Controller::update(){
         }
     }
 
-	if(this->tick % update_tick == 0)
+	if((this->tick % update_tick) == 0)
 	{
 		tCollisionInfo collisionInfo;
 

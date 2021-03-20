@@ -24,7 +24,7 @@ public:
 	void setAngle(int angle);
 	void updatePos();
 	void render(SDL_Renderer* renderer);
-	bool is_Thrown();
+	bool isThrown();
 
 private:
 	int angle;

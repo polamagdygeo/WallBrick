@@ -11,16 +11,19 @@
 #include "tDirection.h"
 #include "Barrier.h"
 
+#define BAR_LENGTH				150u
+#define BAR_WIDTH				15u
+#define BAR_STEP				20u
+
 class Bar : public Barrier
 {
-
 public:
 	Bar(View* v);
 	virtual ~Bar();
 	void move(tDirection dir);
 
 private:
-	static const int bar_step = 20;
+	static const int bar_step = BAR_STEP;
 	View* pParentView;
 
 };

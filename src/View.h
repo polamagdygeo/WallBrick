@@ -40,7 +40,7 @@ public:
 	void generateBricks();
 	void render();
 	void showScore(int score);
-	void updateObjVector(void);
+	void updateObjList(void);
 	void clear();
 	void moveBallWithBar();
 	void getGameAreaDim(int& x,int &y);

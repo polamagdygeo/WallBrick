@@ -9,6 +9,10 @@
 #include "Ball.h"
 #include "math.h"
 
+#define NO_OF_BRICKS_ROWS			10u
+#define BRICK_MIN_LENGTH			60u
+#define BRICK_MAX_LENGTH			120u
+
 
 View::View(SDL_Renderer* r,int x,int y){
 	gRenderer = r;
@@ -30,7 +34,7 @@ View::~View(){
 }
 
 
-void View::updateObjVector(void)
+void View::updateObjList(void)
 {
 	ObjVector.push_back(&this->m_Ball);
 	ObjVector.push_back(&this->m_Bar);
@@ -116,26 +120,28 @@ bool View::checkBallCollision(tCollisionInfo& info){
 
 void View::generateBricks(){
 	int pos_x,pos_y;
-	int dim_x,dim_y = 15;
-	int current_draw_location_x = 15,current_draw_location_y = 10;
+	int dim_x,dim_y = BRICK_WIDTH;
+	int current_draw_location_x = FRAME_THICKNESS + FRAME_BRICK_SPACE_X;
+	int current_draw_location_y = FRAME_BRICK_SPACE_Y + FRAME_THICKNESS;
 	int row_no = 0;
 	int i = 0;
 
-	while(row_no < 10 && i <MAX_BRICKS_NO)
+	while(row_no < NO_OF_BRICKS_ROWS && 
+		(i <MAX_BRICKS_NO))
 	{
 		this->m_Brick[i] = new Brick;
 		/*dim_x = random value within range*/
-		dim_x = rand()%(120-60) + 60;
+		dim_x = (rand() % (BRICK_MAX_LENGTH - BRICK_MIN_LENGTH)) + BRICK_MIN_LENGTH;
 		pos_x = current_draw_location_x;
 		pos_y = current_draw_location_y;
 
 		int frame_x,frame_y;
 		this->m_Frame.getFrameSize(frame_x,frame_y);
 
-		if(current_draw_location_x+dim_x >= frame_x - 10 - 20)
+		if((current_draw_location_x + dim_x) >= (frame_x - FRAME_BRICK_SPACE_X - 20))
 		{
-			dim_x -=  (current_draw_location_x+dim_x)-(frame_x) + 10 + 5;
-			current_draw_location_x = 15;
+			dim_x -=  (current_draw_location_x + dim_x) - (frame_x + FRAME_BRICK_SPACE_X + FRAME_THICKNESS);
+			current_draw_location_x = FRAME_THICKNESS + FRAME_BRICK_SPACE_X;
 			current_draw_location_y += dim_y;
 			row_no++;
 		}
@@ -157,8 +163,8 @@ void View::generateBricks(){
 
 void View::clear()
 {
-    SDL_SetRenderDrawColor( gRenderer, 0, 0, 0, 0 );
-    SDL_RenderClear( gRenderer );
+    SDL_SetRenderDrawColor(gRenderer,0,0,0,0);
+    SDL_RenderClear(gRenderer);
 }
 
 
@@ -186,5 +192,5 @@ void View::moveBallWithBar()
 
 	Ball_Rad = this->m_Ball.getRad();
 
-	this->m_Ball.setPos(Bar_Pos_x+Bar_Dim_x/2, Bar_Pos_y-Ball_Rad );
+	this->m_Ball.setPos(Bar_Pos_x + (Bar_Dim_x / 2), Bar_Pos_y - Ball_Rad);
 }

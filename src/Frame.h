@@ -11,6 +11,14 @@
 #include "Object.h"
 #include "FrameSide.h"
 
+#define FRAME_LENGTH		640u
+#define FRAME_WIDTH			480u
+#define FRAME_THICKNESS		5u
+#define FRAME_BAR_SPACE_X	10u
+#define FRAME_BAR_SPACE_Y	5u
+#define FRAME_BRICK_SPACE_X	10u
+#define FRAME_BRICK_SPACE_Y	5u
+
 class Frame : public Object
 {
 
