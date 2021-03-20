@@ -9,7 +9,7 @@
 #include "tBarrier.h"
 #include "GameConfig.h"
 
-#define VIEW_UPDATE_RATE
+#define VIEW_UPDATE_RATE		40u
 
 
 Controller::Controller():update_tick(VIEW_UPDATE_RATE){
